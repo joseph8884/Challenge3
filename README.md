@@ -1202,62 +1202,21 @@ COMPLETAR: Reflexión sobre el proceso de pruebas:
 
 ---
 
+// ...existing code...
 ## 5. Conclusiones y Trabajo Futuro
 
 ### 5.1 Conclusiones
 
-<!--
-═══════════════════════════════════════════════════════════════════════════════
-COMPLETAR: Conclusiones generales del proyecto (3-5 párrafos):
+Se desarrolló exitosamente un prototipo funcional de un sistema de alerta temprana para deslizamientos, cumpliendo con el objetivo general del proyecto. Se logró la integración de cinco sensores clave (inclinación, vibración, lluvia, humedad y temperatura) en un nodo ESP32, demostrando la viabilidad de una solución de monitoreo de bajo costo. La implementación de un algoritmo de fusión de señales, que pondera las variables y detecta sinergias críticas, permitió generar un índice de riesgo unificado y coherente, activando un sistema de alarmas multinivel de forma efectiva durante las pruebas simuladas.
 
-LOGROS PRINCIPALES:
-- Resumen de lo logrado vs. objetivos planteados
-- Funcionalidades implementadas exitosamente
-- Contribución al problema de deslizamientos en Sabana Centro
+Desde el punto de vista técnico, el proyecto representó un aprendizaje significativo en arquitecturas IoT de extremo a extremo, desde la programación de sistemas embebidos con FreeRTOS hasta la configuración de un gateway en Raspberry Pi y la visualización de datos en la nube con Ubidots. La implementación del protocolo MQTT como eje de la comunicación resultó ser robusta y eficiente para la transmisión de datos entre los distintos componentes del sistema, tanto en la red local como hacia la nube.
 
-APRENDIZAJES TÉCNICOS:
-- Conocimientos adquiridos en IoT, sistemas embebidos, comunicación MQTT
-- Comprensión de sensores y fusión de señales
-- Experiencia con FreeRTOS, arquitecturas concurrentes
-
-VALIDACIÓN:
-- El prototipo demostró ser capaz de detectar condiciones de riesgo
-- La lógica de fusión produjo resultados coherentes
-- El sistema es viable como base para un producto piloto
-
-LIMITACIONES:
-- Reconocimiento honesto de lo que faltó o no se logró completamente
-═══════════════════════════════════════════════════════════════════════════════
--->
+La validación experimental, a través de escenarios simulados, confirmó que el prototipo es capaz de identificar condiciones de riesgo y responder adecuadamente, activando las alarmas locales y remotas. Aunque el sistema presenta limitaciones, como la falta de una carcasa para exteriores y una fuente de alimentación autónoma, establece una base sólida y prometedora para futuras iteraciones. Este trabajo contribuye con una solución tangible y escalable al problema de la gestión del riesgo por remoción en masa en la región.
 
 ### 5.2 Retos Presentados Durante el Desarrollo
-
 <!--
 ═══════════════════════════════════════════════════════════════════════════════
-COMPLETAR: Describir principales retos y cómo se resolvieron:
-
-RETOS TÉCNICOS:
-1. Reto 1: Sincronización entre tareas FreeRTOS
-   - Problema: Race conditions en acceso a datos compartidos
-   - Solución: Implementación de mutex y semáforos
-
-2. Reto 2: Calibración de sensores analógicos (lluvia, suelo)
-   - Problema: Valores ADC inconsistentes
-   - Solución: Promediado de múltiples lecturas + calibración empírica
-
-3. Reto 3: Latencia de comunicación MQTT
-   - Problema: Retrasos >2s en condiciones de red inestable
-   - Solución: Implementación de QoS 1, buffers locales
-
-RETOS DE INTEGRACIÓN:
-- Dificultades con versiones de librerías
-- Compatibilidad entre ESP32 y Raspberry Pi
-- Debugging de comunicación MQTT
-
-RETOS DE DISEÑO:
-- Definición de umbrales adecuados sin datos reales de campo
-- Balance entre sensibilidad y falsos positivos
-═══════════════════════════════════════════════════════════════════════════════
+ Falta poner aca los retos
 -->
 
 ### 5.3 Trabajo Futuro
@@ -1295,41 +1254,35 @@ ESCALABILIDAD:
 
 ### 5.4 Roles y Contribuciones del Equipo
 
-<!--
-═══════════════════════════════════════════════════════════════════════════════
-COMPLETAR: Documentar claramente el aporte de cada miembro:
-
-**Héctor José Guzmán (Código XXXXX):**
+**Héctor José Guzmán (Investigación y Desarrollo):**
 - Responsabilidades principales:
-  * [Ej: Desarrollo del módulo de fusión de señales]
-  * [Ej: Implementación de servidor web y dashboard]
-  * [Ej: Integración de sensores I2C y OneWire]
+  * Investigación de sensores y algoritmos de fusión de señales.
+  * Desarrollo del firmware principal en el ESP32 para la adquisición y procesamiento de datos.
+  * Implementación de la lógica de lectura para los sensores (MPU6050, DS18B20, etc.).
+  * Programación del motor de fusión de señales y la máquina de estados de las alarmas.
 - Contribuciones específicas:
-  * Desarrollo de X líneas de código
-  * Diseño de diagramas UML (clases, secuencia)
-  * Documentación de secciones 2.X, 3.X
-- Tiempo invertido: X horas
+  * Escritura del código C++ para el ESP32 utilizando PlatformIO.
+  * Implementación de tareas concurrentes con FreeRTOS para el manejo de sensores y comunicación.
+  * Documentación de los módulos de software y criterios de diseño.
 
-**Luis Mario [Apellido] (Código XXXXX):**
+**Luis Mario Ramirez (Arquitecto de la Solución):**
 - Responsabilidades principales:
-  * [Ej: Configuración de Raspberry Pi y base de datos]
-  * [Ej: Integración MQTT y comunicación con Ubidots]
-  * [Ej: Desarrollo de pruebas experimentales]
+  * Diseño de la arquitectura general del sistema (nodo, gateway, nube).
+  * Configuración de la Raspberry Pi como gateway IoT, incluyendo el broker MQTT (Mosquitto) y la base de datos SQLite.
+  * Implementación de la comunicación entre la red local y la plataforma en la nube (Ubidots).
+  * Diseño y desarrollo del dashboard web local en el ESP32.
 - Contribuciones específicas:
-  * Desarrollo de scripts Python para Gateway
-  * Diseño de protocolo de pruebas
-  * Documentación de secciones 4.X, 5.X
-- Tiempo invertido: X horas
+  * Desarrollo de los scripts en Python para el gateway.
+  * Diseño de la estructura de tópicos MQTT y el formato de los mensajes JSON.
+  * Creación de la interfaz de usuario (HTML/CSS/JS) para el monitoreo en tiempo real.
+  * Diseño del protocolo de pruebas y los escenarios de validación.
 
 **Trabajo Colaborativo:**
-- Decisiones de arquitectura: ambos
-- Debugging y troubleshooting: ambos
-- Redacción de documentación: distribución por secciones
-- Video demostrativo: ambos (guion, grabación, edición)
-═══════════════════════════════════════════════════════════════════════════════
--->
+- Las decisiones sobre la arquitectura y el diseño del sistema se tomaron en conjunto.
+- Ambos miembros participaron activamente en las fases de integración, pruebas y depuración.
+- La redacción de la documentación final y la producción del video demostrativo fueron esfuerzos compartidos.
 
----
+
 
 ## 6. Referencias
 
@@ -1342,20 +1295,6 @@ COMPLETAR: Documentar claramente el aporte de cada miembro:
 [4] L. Piciullo, V. Capobianco, and H. Heyerdahl, "A first step towards a IoT-based local early warning system for an unsaturated slope in Norway," *Natural Hazards*, 2022, doi: 10.1007/s11069-022-05524-3.
 
 [5] V. Henao-Céspedes, Y. A. Garcés-Gómez, and M. N. Marín Olaya, "Landslide early warning systems: a perspective from the internet of things," *Indonesian Journal of Electrical Engineering and Computer Science*, 2023. [Online]. Available: https://d1wqtxts1xzle7.cloudfront.net/97071057/99_28430_EMr_15sep22_16Mei22_20_K-libre.pdf
-
-<!--
-═══════════════════════════════════════════════════════════════════════════════
-COMPLETAR: Agregar referencias adicionales utilizadas:
-- Datasheets de sensores
-- Documentación de librerías (ESPAsyncWebServer, PubSubClient, etc.)
-- Artículos sobre algoritmos de fusión
-- Normatividad colombiana consultada
-- Tutoriales y recursos online relevantes
-- Papers sobre geotecnia y deslizamientos
-
-Formato IEEE para todas las referencias adicionales
-═══════════════════════════════════════════════════════════════════════════════
--->
 
 ---
 
