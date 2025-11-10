@@ -270,26 +270,29 @@ sequenceDiagram
 ##### 2.3.2.1 Diagrama de Casos de Uso
 
 ```mermaid
-usecaseDiagram
-actor "Operador Local" as Operador
-actor "Autoridad Municipal" as Autoridad
-actor "Módulo IA" as IA
+flowchart LR
+    Operador([Operador Local])
+    Autoridad([Autoridad Municipal])
+    IA([Módulo IA])
 
-rectangle "Sistema de Monitoreo de Talud" {
-  usecase "Monitorear variables del talud" as UC1
-  usecase "Visualizar estado en dashboard local" as UC2
-  usecase "Recibir alertas tempranas" as UC3
-  usecase "Consultar historial y tendencias" as UC4
-  usecase "Obtener recomendaciones automáticas" as UC5
-}
+    subgraph Sistema["Sistema de Monitoreo de Talud"]
+        UC1((Monitorear variables del talud))
+        UC2((Visualizar estado en dashboard local))
+        UC3((Recibir alertas tempranas))
+        UC4((Consultar historial y tendencias))
+        UC5((Obtener recomendaciones automáticas))
+    end
 
-Operador --> UC1
-Operador --> UC2
-Operador --> UC3
-Autoridad --> UC3
-Autoridad --> UC4
-Autoridad --> UC5
-IA --> UC5
+    Operador --> UC1
+    Operador --> UC2
+    Operador --> UC3
+
+    Autoridad --> UC3
+    Autoridad --> UC4
+    Autoridad --> UC5
+
+    IA --> UC5
+
 ```
 
 ##### 2.3.2.2 Diagrama de Clases (Vista Lógica Simplificada)
